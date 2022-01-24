@@ -32,7 +32,7 @@ class MealRepository
       row[:price] = row[:price].to_i
       @meals << Meal.new(row)
     end
-    @next_id = @meals.max { |meal| meal.id }.id + 1
+    @next_id = @meals.last.id + 1 unless @meals.empty?
   end
 
   def save_csv

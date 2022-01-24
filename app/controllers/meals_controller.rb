@@ -18,7 +18,7 @@ class MealsController
     # create a new Meal instance
     # send to repo to persist
     name = @view.ask_user_for('name')
-    price = @view.ask_user_for('price')
+    price = @view.ask_user_for_price
     meal = Meal.new(name: name, price: price)
     @meal_repository.create(meal)
   end

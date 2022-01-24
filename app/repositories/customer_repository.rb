@@ -37,7 +37,7 @@ class CustomerRepository
       row[:address] = row[:address]
       @customers << Customer.new(row)
     end
-    @next_id = @customers.max { |customer| customer.id }.id + 1
+    @next_id = @customers.last.id + 1 unless @customers.empty?
   end
 
   def save_csv
