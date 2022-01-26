@@ -14,9 +14,22 @@ class Employee
     @password = attributes[:password]
     @role = attributes[:role]
     @id = attributes[:id]
+    @orders = []
   end
 
   def manager?
     @role == 'manager'
+  end
+
+  def rider?
+    @role == 'rider'
+  end
+
+  def add_order(order)
+    @orders << order
+  end
+
+  def undelivered_orders
+    @orders.reject { |order| order.delivered? }
   end
 end
