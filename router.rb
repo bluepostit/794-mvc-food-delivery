@@ -72,7 +72,7 @@ class Router
     when 4 then @customers_controller.add
     when 5 then @customers_controller.update
     when 6 then @orders_controller.add
-    when 7 then @orders_controller.list_undelivered
+    when 7 then @orders_controller.list_undelivered_orders
     when 8 then @employee = nil
     when 9 then exit
     end
@@ -80,8 +80,8 @@ class Router
 
   def dispatch_rider_action(action)
     case action
-    when 1 then @orders_controller.list_my_undelivered(@employee)
-    when 2 then @orders_controller.deliver(@employee)
+    when 1 then @orders_controller.list_my_orders(@employee)
+    when 2 then @orders_controller.mark_as_delivered(@employee)
     when 8 then @employee = nil
     when 9 then exit
     end

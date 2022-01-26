@@ -7,7 +7,8 @@ class Employee
   # Behavior
   # - readers
 
-  attr_reader :username, :password, :role, :id
+  attr_reader :username, :password, :role
+  attr_accessor :id
 
   def initialize(attributes = {})
     @username = attributes[:username]

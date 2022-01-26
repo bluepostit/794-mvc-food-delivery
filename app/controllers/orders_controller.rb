@@ -47,7 +47,7 @@ class OrdersController
     @order_repository.create(order)
   end
 
-  def deliver(employee)
+  def mark_as_delivered(employee)
     orders = employee.undelivered_orders
     @view.display(orders)
     index = @view.ask_user_for_index
@@ -55,12 +55,12 @@ class OrdersController
     @order_repository.deliver(order)
   end
 
-  def list_undelivered
-    orders = @order_repository.all_undelivered
+  def list_undelivered_orders
+    orders = @order_repository.undelivered_orders
     @view.display(orders)
   end
 
-  def list_my_undelivered(employee)
+  def list_my_orders(employee)
     orders = employee.undelivered_orders
     @view.display(orders)
   end
