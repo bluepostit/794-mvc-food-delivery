@@ -17,7 +17,6 @@ class Router
         dispatch(action)
       end
     end
-    puts 'Goodbye'
   end
 
   private
@@ -64,6 +63,7 @@ class Router
     end
   end
 
+  # rubocop:disable Metrics/MethodLength
   def dispatch_manager_action(action)
     case action
     when 1 then @meals_controller.list
@@ -77,6 +77,7 @@ class Router
     when 9 then exit
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   def dispatch_rider_action(action)
     case action

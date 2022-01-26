@@ -12,29 +12,9 @@ class OrdersController
   end
 
   def add
-    # fetch all meals
-    # show the meals
-    # get user choice of meal
-    meals = @meal_repository.all
-    MealsView.new.display(meals)
-    index = @view.ask_user_for_index
-    meal = meals[index]
-
-    # fetch all customers
-    # show the customers
-    # get user choice of customer
-    customers = @customer_repository.all
-    CustomersView.new.display(customers)
-    index = @view.ask_user_for_index
-    customer = customers[index]
-
-    # fetch all riders
-    # show the riders
-    # get user choice of rider
-    riders = @employee_repository.all_riders
-    @view.display_riders(riders)
-    index = @view.ask_user_for_index
-    employee = riders[index]
+    meal = select_meal
+    customer = select_customer
+    employee = select_rider
 
     # create a new Order with this data
     # add it to the repo
@@ -63,5 +43,37 @@ class OrdersController
   def list_my_orders(employee)
     orders = employee.undelivered_orders
     @view.display(orders)
+  end
+
+  private
+
+  def select_meal
+    # fetch all meals
+    # show the meals
+    # get user choice of meal
+    meals = @meal_repository.all
+    MealsView.new.display(meals)
+    index = @view.ask_user_for_index
+    meals[index]
+  end
+
+  def select_customer
+    # fetch all customers
+    # show the customers
+    # get user choice of customer
+    customers = @customer_repository.all
+    CustomersView.new.display(customers)
+    index = @view.ask_user_for_index
+    customers[index]
+  end
+
+  def select_rider
+    # fetch all riders
+    # show the riders
+    # get user choice of rider
+    riders = @employee_repository.all_riders
+    @view.display_riders(riders)
+    index = @view.ask_user_for_index
+    riders[index]
   end
 end

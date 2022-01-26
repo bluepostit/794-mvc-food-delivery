@@ -40,12 +40,7 @@ class OrderRepository
 
   def load_csv
     CSV.foreach(@csv_file_path, headers: :first_row, header_converters: :symbol) do |row|
-      row[:id] = row[:id].to_i
-      row[:delivered] = row[:delivered] == 'true'
-      row[:customer] = @customer_repository.find(row[:customer_id].to_i)
-      row[:meal] = @meal_repository.find(row[:meal_id].to_i)
-      row[:employee] = @employee_repository.find(row[:employee_id].to_i)
-      order = Order.new(row)
+      order = build_order(row)
       order.employee.add_order(order)
       @orders << order
     end
@@ -59,5 +54,14 @@ class OrderRepository
         csv << [order.id, order.delivered?, order.meal.id, order.customer.id, order.employee.id]
       end
     end
+  end
+
+  def build_order(row)
+    row[:id] = row[:id].to_i
+    row[:delivered] = row[:delivered] == 'true'
+    row[:customer] = @customer_repository.find(row[:customer_id].to_i)
+    row[:meal] = @meal_repository.find(row[:meal_id].to_i)
+    row[:employee] = @employee_repository.find(row[:employee_id].to_i)
+    Order.new(row)
   end
 end
